@@ -1,0 +1,20 @@
+debug:
+  config: false
+  overhead: false
+  queries: false
+  counts: false
+
+bind:
+  address: localhost
+  port: 12345
+
+task-time-limit-millis: 10
+
+batch:
+  entities: 100
+  chunks: 30
+
+worlds:
+- world
+- world_nether
+- world_the_end

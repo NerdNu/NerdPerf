@@ -1,0 +1,29 @@
+name: ${project.name}
+version: ${project.version}
+author: totemo
+authors: [totemo]
+description: ${project.description}
+website: ${project.url}
+main: nu.nerd.stats.NerdStats
+
+permissions:
+  nerdstats.admin:
+    description: Permission to administer the plugin.
+    default: op
+
+  nerdstats.lag:
+    description: Permission to run the /lag command.
+    default: op
+
+commands:
+  nerdstats:
+    description: ${project.name} administrative command.
+    permission: nerdstats.admin
+    usage: |
+      /<command> reload: Reload the configuration.
+
+  lag:
+    description: Show the current TPS and memory usage.
+    permission: nerdstats.lag
+    usage: |
+      /<command>: Show the current TPS and memory usage.
