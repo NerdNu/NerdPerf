@@ -6,8 +6,8 @@ Statistics are returned as a JSON object.
 
 Features
 --------
-`NerdStats` listens a TCP server on configurable address and port and returns
-the following statistics as a single JSON object:
+`NerdStats` accepts TCP clients on a configurable address and port and
+returns the following statistics as a single JSON object:
 
  * Overall:
    * `tps` - The ticks per second, up to 20.
@@ -104,7 +104,7 @@ Configuration
    time limit.
  * `batch.entities` - The number of entities to count in one step before
    checking whether the elapsed time has exceeded the limit.
- * `batch.chunks` - The number of chunks to count in one step before
+ * `batch.chunks` - The number of chunks in which to count hoppers before
    checking whether the elapsed time has exceeded the limit.
  * `worlds` - A list of the names of worlds where statistics should be gathered.
 
