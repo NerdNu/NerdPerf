@@ -1,4 +1,4 @@
-package nu.nerd.stats;
+package nu.nerd.perf;
 
 import java.util.LinkedList;
 
