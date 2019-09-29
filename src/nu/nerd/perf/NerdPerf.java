@@ -9,7 +9,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.json.simple.JSONObject;
 
@@ -108,7 +107,7 @@ public class NerdPerf extends JavaPlugin {
         LinkedList<BooleanSupplier> steps = new LinkedList<BooleanSupplier>();
         for (World world : CONFIG.WORLDS) {
             JSONObject jsonWorld = getJSONObject(jsonAllWorlds, world.getName());
-            jsonWorld.put("view_distance", getViewDistance(world));
+            jsonWorld.put("view_distance", world.getViewDistance());
             steps.add(new CountEntitiesTask(world, getJSONObject(jsonWorld, "entities")));
             steps.add(new CountHoppersTask(world, jsonWorld));
         }
@@ -149,19 +148,6 @@ public class NerdPerf extends JavaPlugin {
             parent.put(name, child);
         }
         return child;
-    }
-
-    // ------------------------------------------------------------------------
-    /**
-     * Return the view distance in the specified world.
-     *
-     * @param world the World.
-     * @return the view distance.
-     */
-    protected int getViewDistance(World world) {
-        YamlConfiguration spigotConfig = Bukkit.getServer().spigot().getConfig();
-        int defaultViewDistance = spigotConfig.getInt("world-settings.default.view-distance", 12);
-        return spigotConfig.getInt("world-settings." + world.getName() + ".view-distance", defaultViewDistance);
     }
 
     // ------------------------------------------------------------------------
