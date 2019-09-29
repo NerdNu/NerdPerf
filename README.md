@@ -1,4 +1,4 @@
-NerdStats
+NerdPerf
 =========
 A Bukkit plugin to gather Minecraft-related performance statistics.
 Statistics are returned as a JSON object.
@@ -6,7 +6,7 @@ Statistics are returned as a JSON object.
 
 Features
 --------
-`NerdStats` accepts TCP clients on a configurable address and port and
+`NerdPerf` accepts TCP clients on a configurable address and port and
 returns the following statistics as a single JSON object:
 
  * Overall:
@@ -22,19 +22,19 @@ returns the following statistics as a single JSON object:
    * `worlds.<worldname>.entities.<type>` - The number of entities of type
      `<type>` in the world named `<worldname>`.
      
-Counting entities and hoppers is time consuming. `NerdStats` spreads these
+Counting entities and hoppers is time consuming. `NerdPerf` spreads these
 counting activities over multiple server ticks and imposes a configurable upper
 limit on the time spent counting in any one tick.
 
 No authentication or authorisation of client connections is performed.
-Therefore, it is advisable to configure `NerdStats` to bind `localhost` (the
+Therefore, it is advisable to configure `NerdPerf` to bind `localhost` (the
 default) rather than an externally accessible IP address if you are concerned
 about the performance impact of unrestricted statistics queries.
 
 
 Testing
 -------
-You can test `NerdStats` by using `netcat` to retrieve the JSON object and 
+You can test `NerdPerf` by using `netcat` to retrieve the JSON object and 
 formatting the object as text using `jq`:
 
 ```
@@ -85,7 +85,7 @@ Configuration
 -------------
  * `debug.config` - If `true`, log the configuration to the console when it is
    loaded.
- * `debug.overhead` - If `true`, log elapsed time when computing statistics.
+ * `debug.overhead` - If `true`, log elapsed time when computing metrics.
  * `debug.queries` - If `true`, log client connections to the query server.
  * `debug.counts` - If `true`, log progress (number of hoppers or entites
    counted in one counting step).  Multiple steps may run in a given server
@@ -106,17 +106,17 @@ Configuration
    checking whether the elapsed time has exceeded the limit.
  * `batch.chunks` - The number of chunks in which to count hoppers before
    checking whether the elapsed time has exceeded the limit.
- * `worlds` - A list of the names of worlds where statistics should be gathered.
+ * `worlds` - A list of the names of worlds where metrics should be gathered.
 
 
 Commands
 --------
- * `/nerdstats reload` - Reload the configuration.
+ * `/nerdperf reload` - Reload the configuration.
  * `/lag` - Show TPS, used and allocated heap sizes in MB.
 
 
 Permissions
 -----------
- * `nerdstats.admin` - Permission to use `/nerdstats`.
- * `nerdstats.lag` - Permission to us `/lag`.
+ * `nerdperf.admin` - Permission to use `/nerdperf`.
+ * `nerdperf.lag` - Permission to us `/lag`.
 
