@@ -8,7 +8,7 @@ bind:
   address: localhost
   port: 12345
 
-task-time-limit-millis: 10
+task-time-limit-millis: 5
 
 batch:
   entities: 100
