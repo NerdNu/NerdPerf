@@ -11,7 +11,7 @@ import org.bukkit.Bukkit;
  * one tick and automatically re-schedules itself to run in the next tick until
  * the work is done.
  *
- * The time limit is taken from {@link NerdStats#CONFIG}.
+ * The time limit is taken from {@link NerdPerf#CONFIG}.
  */
 public class SynchronousTimeLimitedTask implements Runnable {
     // ------------------------------------------------------------------------
@@ -43,15 +43,15 @@ public class SynchronousTimeLimitedTask implements Runnable {
         do {
             more = process();
             elapsed = System.nanoTime() - start;
-        } while (more && elapsed < NerdStats.CONFIG.TASK_TIME_LIMIT_MILLIS * 1_000_000);
+        } while (more && elapsed < NerdPerf.CONFIG.TASK_TIME_LIMIT_MILLIS * 1_000_000);
 
         if (more) {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(NerdStats.PLUGIN, this);
+            Bukkit.getScheduler().scheduleSyncDelayedTask(NerdPerf.PLUGIN, this);
         }
 
-        if (NerdStats.CONFIG.DEBUG_OVERHEAD) {
+        if (NerdPerf.CONFIG.DEBUG_OVERHEAD) {
             double elapsedMillis = elapsed * 1e-6;
-            NerdStats.PLUGIN.getLogger().info("Statistics task took " + elapsedMillis + " ms");
+            NerdPerf.PLUGIN.getLogger().info("Measurement task took " + elapsedMillis + " ms");
         }
     }
 

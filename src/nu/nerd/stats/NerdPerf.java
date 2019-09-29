@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
 /**
  * Plugin class.
  */
-public class NerdStats extends JavaPlugin {
+public class NerdPerf extends JavaPlugin {
     // ------------------------------------------------------------------------
     /**
      * Configuration instance.
@@ -27,7 +27,7 @@ public class NerdStats extends JavaPlugin {
     /**
      * This plugin as a singleton.
      */
-    public static NerdStats PLUGIN;
+    public static NerdPerf PLUGIN;
 
     // ------------------------------------------------------------------------
     /**
@@ -82,14 +82,14 @@ public class NerdStats extends JavaPlugin {
 
     // ------------------------------------------------------------------------
     /**
-     * Start gathering statistics and schedule synchronous tasks to complete the
+     * Start gathering metrics and schedule synchronous tasks to complete the
      * process.
      *
-     * The statistics will be added to the _statistics queue as a JSONObject
-     * that will be returned to the client.
+     * The metrics will be added to the _metrics queue as a JSONObject that will
+     * be returned to the client.
      */
     @SuppressWarnings("unchecked")
-    public void requestStatistics() {
+    public void requestMetrics() {
         long start = System.nanoTime();
 
         JSONObject results = new JSONObject();
@@ -116,9 +116,9 @@ public class NerdStats extends JavaPlugin {
             @Override
             public boolean getAsBoolean() {
                 try {
-                    _statistics.add(results);
+                    _metrics.add(results);
                 } catch (IllegalStateException ex) {
-                    getLogger().warning("Cannot add statistics to the queue.");
+                    getLogger().warning("Cannot add metrics to the queue.");
                 }
                 return false;
             }
@@ -127,7 +127,7 @@ public class NerdStats extends JavaPlugin {
 
         if (CONFIG.DEBUG_OVERHEAD) {
             double elapsedMillis = 1e-6 * (System.nanoTime() - start);
-            getLogger().info("Statistics setup took " + elapsedMillis + " ms.");
+            getLogger().info("Metrics setup took " + elapsedMillis + " ms.");
         }
     }
 
@@ -174,10 +174,10 @@ public class NerdStats extends JavaPlugin {
      *
      * @return the results JSONObject, when it is added to the queue.
      */
-    public JSONObject awaitStatistics() {
-        synchronized (_statistics) {
+    public JSONObject awaitMetrics() {
+        synchronized (_metrics) {
             try {
-                return _statistics.take();
+                return _metrics.take();
             } catch (InterruptedException ex) {
                 return null;
             }
@@ -238,5 +238,5 @@ public class NerdStats extends JavaPlugin {
     /**
      * Queue of results returned to clients.
      */
-    protected ArrayBlockingQueue<JSONObject> _statistics = new ArrayBlockingQueue<JSONObject>(10);
-} // class NerdStats
+    protected ArrayBlockingQueue<JSONObject> _metrics = new ArrayBlockingQueue<JSONObject>(10);
+} // class NerdPerf

@@ -26,12 +26,12 @@ public class QueryServer extends Thread {
         close();
         InetAddress address;
         try {
-            address = InetAddress.getByName(NerdStats.CONFIG.BIND_ADDRESS);
+            address = InetAddress.getByName(NerdPerf.CONFIG.BIND_ADDRESS);
         } catch (UnknownHostException ex) {
-            getLogger().severe("Unknown host: " + NerdStats.CONFIG.BIND_ADDRESS + "; defaulting to localhost.");
+            getLogger().severe("Unknown host: " + NerdPerf.CONFIG.BIND_ADDRESS + "; defaulting to localhost.");
             address = InetAddress.getLocalHost();
         }
-        _listener = new ServerSocket(NerdStats.CONFIG.BIND_PORT, 1, address);
+        _listener = new ServerSocket(NerdPerf.CONFIG.BIND_PORT, 1, address);
     }
 
     // ------------------------------------------------------------------------
@@ -57,12 +57,12 @@ public class QueryServer extends Thread {
             try (
             Socket client = _listener.accept();
             Writer writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));) {
-                if (NerdStats.CONFIG.DEBUG_QUERIES) {
+                if (NerdPerf.CONFIG.DEBUG_QUERIES) {
                     getLogger().info("Accepted client: " + client.getInetAddress() + ":" + client.getPort());
                 }
 
-                Bukkit.getScheduler().scheduleSyncDelayedTask(NerdStats.PLUGIN, () -> NerdStats.PLUGIN.requestStatistics());
-                JSONObject results = NerdStats.PLUGIN.awaitStatistics();
+                Bukkit.getScheduler().scheduleSyncDelayedTask(NerdPerf.PLUGIN, () -> NerdPerf.PLUGIN.requestMetrics());
+                JSONObject results = NerdPerf.PLUGIN.awaitMetrics();
                 if (results == null) {
                     getLogger().info("Query server stopping.");
                 } else {
@@ -70,7 +70,7 @@ public class QueryServer extends Thread {
                 }
                 writer.close();
                 client.close();
-                if (NerdStats.CONFIG.DEBUG_QUERIES) {
+                if (NerdPerf.CONFIG.DEBUG_QUERIES) {
                     getLogger().info("Results sent.");
                 }
             } catch (IOException ex) {
@@ -90,7 +90,7 @@ public class QueryServer extends Thread {
      * @return the plugin's Logger.
      */
     protected Logger getLogger() {
-        return NerdStats.PLUGIN.getLogger();
+        return NerdPerf.PLUGIN.getLogger();
     }
 
     // ------------------------------------------------------------------------

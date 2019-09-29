@@ -21,7 +21,7 @@ public class Configuration {
     public boolean DEBUG_CONFIG;
 
     /**
-     * If true, log elapsed time computing statistics.
+     * If true, log elapsed time computing metrics.
      */
     public boolean DEBUG_OVERHEAD;
 
@@ -46,7 +46,7 @@ public class Configuration {
     public int BIND_PORT;
 
     /**
-     * Time limit, in milliseconds, of any statistics gathering task.
+     * Time limit, in milliseconds, of any metrics gathering task.
      */
     public int TASK_TIME_LIMIT_MILLIS;
 
@@ -63,7 +63,7 @@ public class Configuration {
     public int BATCH_CHUNKS;
 
     /**
-     * Worlds where statistics are gathered.
+     * Worlds where metrics are gathered.
      */
     public List<World> WORLDS = new ArrayList<World>();
 
@@ -72,7 +72,7 @@ public class Configuration {
      * Reload the configuration file.
      */
     public void reload() {
-        NerdStats.PLUGIN.reloadConfig();
+        NerdPerf.PLUGIN.reloadConfig();
 
         DEBUG_CONFIG = getConfig().getBoolean("debug.config");
         DEBUG_OVERHEAD = getConfig().getBoolean("debug.overhead");
@@ -115,7 +115,7 @@ public class Configuration {
      * @return the plugin's FileConfiguration.
      */
     protected FileConfiguration getConfig() {
-        return NerdStats.PLUGIN.getConfig();
+        return NerdPerf.PLUGIN.getConfig();
     }
 
     // ------------------------------------------------------------------------
@@ -125,6 +125,6 @@ public class Configuration {
      * @return the plugin's Logger.
      */
     protected Logger getLogger() {
-        return NerdStats.PLUGIN.getLogger();
+        return NerdPerf.PLUGIN.getLogger();
     }
 } // class Configuration

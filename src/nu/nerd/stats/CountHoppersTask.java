@@ -44,7 +44,7 @@ public class CountHoppersTask implements BooleanSupplier {
         }
 
         int startIndex = _index;
-        int iterations = Math.min(_chunks.length - _index, NerdStats.CONFIG.BATCH_CHUNKS);
+        int iterations = Math.min(_chunks.length - _index, NerdPerf.CONFIG.BATCH_CHUNKS);
         for (int i = 0; i < iterations; ++i) {
             Chunk chunk = _chunks[_index++];
             for (BlockState tileEntity : chunk.getTileEntities()) {
@@ -54,8 +54,8 @@ public class CountHoppersTask implements BooleanSupplier {
             }
         }
 
-        if (NerdStats.CONFIG.DEBUG_COUNTS) {
-            NerdStats.PLUGIN.getLogger().info("Hopper count in " + _world.getName() +
+        if (NerdPerf.CONFIG.DEBUG_COUNTS) {
+            NerdPerf.PLUGIN.getLogger().info("Hopper count in " + _world.getName() +
                                               " progressed " + (_index - startIndex) + " chunks");
         }
 

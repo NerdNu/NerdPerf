@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nu.nerd</groupId>
-	<name>NerdStats</name>
+	<name>NerdPerf</name>
 	<artifactId>${project.name}</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<packaging>jar</packaging>
-	<description>Server performance statistics gathering.</description>
+	<description>Server performance metrics gathering.</description>
 	<url>https://github.com/NerdNu/${project.name}</url>
 	<scm>
 		<connection>scm:git:git://github.com/NerdNu/${project.name}.git</connection>
@@ -25,8 +25,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.spigotmc</groupId>
-			<artifactId>spigot-api</artifactId>
-			<version>1.9-R0.1-SNAPSHOT</version>
+			<artifactId>spigot</artifactId>
+			<version>1.14.4-R0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<build>

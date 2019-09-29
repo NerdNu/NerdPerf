@@ -1,13 +1,13 @@
 NerdPerf
 =========
-A Bukkit plugin to gather Minecraft-related performance statistics.
-Statistics are returned as a JSON object.
+A Bukkit plugin to gather Minecraft-related performance metrics.
+Metrics are returned as a JSON object.
 
 
 Features
 --------
 `NerdPerf` accepts TCP clients on a configurable address and port and
-returns the following statistics as a single JSON object:
+returns the following metrics as a single JSON object:
 
  * Overall:
    * `tps` - The ticks per second, up to 20.
@@ -15,7 +15,7 @@ returns the following statistics as a single JSON object:
    * `memory.used` - Used heap space in MB.
    * `memory.max` - Allocated heap space in MB.
    * `memory.percent` - Memory usage expressed as a percentage of the heap.
- * For each world (`<worldname>`) configured for statistics gathering:
+ * For each world (`<worldname>`) configured for metrics gathering:
    * `worlds.<worldname>.hoppers` - The number of hopper blocks in the world.
    * `worlds.<worldname>.view_distance` - The view distance in the world.
    * `worlds.<worldname>.chunks` - The number of loaded chunks.
@@ -29,7 +29,7 @@ limit on the time spent counting in any one tick.
 No authentication or authorisation of client connections is performed.
 Therefore, it is advisable to configure `NerdPerf` to bind `localhost` (the
 default) rather than an externally accessible IP address if you are concerned
-about the performance impact of unrestricted statistics queries.
+about the performance impact of unrestricted metrics queries.
 
 
 Testing
@@ -74,7 +74,7 @@ $ nc localhost 12345 | jq .
 On some Linux distributions, you may need to use the `--recv-only` flag to make
 `netcat` disconnect when the server closes the socket.
 
-You can extract specific statistics by specifying a path to `jq`:
+You can extract specific metrics by specifying a path to `jq`:
 ```
 $ nc localhost 12345 | jq .worlds.world.hoppers
 582

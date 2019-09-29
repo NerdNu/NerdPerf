@@ -48,14 +48,14 @@ public class CountEntitiesTask implements BooleanSupplier {
         }
 
         int startIndex = _index;
-        int iterations = Math.min(_entities.size() - _index, NerdStats.CONFIG.BATCH_ENTITIES);
+        int iterations = Math.min(_entities.size() - _index, NerdPerf.CONFIG.BATCH_ENTITIES);
         for (int i = 0; i < iterations; ++i) {
             Entity entity = _entities.get(_index++);
             ++_counts[entity.getType().ordinal()];
         }
 
-        if (NerdStats.CONFIG.DEBUG_COUNTS) {
-            NerdStats.PLUGIN.getLogger().info("Entities count in " + _world.getName() +
+        if (NerdPerf.CONFIG.DEBUG_COUNTS) {
+            NerdPerf.PLUGIN.getLogger().info("Entities count in " + _world.getName() +
                                               " progressed " + (_index - startIndex) + " entities");
         }
 
